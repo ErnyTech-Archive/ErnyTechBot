@@ -6,12 +6,7 @@ import com.pengrad.telegrambot.response.GetUpdatesResponse;
 
 class UpdateHandler {
     private Thread botUpdateThread;
-    private TelegramBot bot;
     private Integer offset = 0;
-
-    UpdateHandler(TelegramBot bot) {
-        this.bot = bot;
-    }
 
     void run(UpdateCallback updateCallback) {
         this.botUpdateThread = new Thread(() -> handler(updateCallback));
@@ -24,7 +19,7 @@ class UpdateHandler {
             GetUpdatesResponse getUpdatesResponse;
 
             try {
-                getUpdatesResponse = this.bot.execute(getUpdates);
+                getUpdatesResponse = Bot.bot.execute(getUpdates);
             } catch (RuntimeException e) {
                 continue;
             }

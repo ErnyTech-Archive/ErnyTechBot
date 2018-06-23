@@ -1,4 +1,3 @@
-import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Message;
 import com.pengrad.telegrambot.request.SendMessage;
 
@@ -6,13 +5,11 @@ class SedHandler {
     private Message message;
     private Message replyMessage;
     private Long chatId;
-    private TelegramBot bot;
 
-    SedHandler(Message message, Long chatId, TelegramBot bot) {
+    SedHandler(Message message, Long chatId) {
         this.message = message;
         this.replyMessage = message.replyToMessage();
         this.chatId = chatId;
-        this.bot = bot;
     }
 
     void run() {
@@ -28,7 +25,7 @@ class SedHandler {
             var sendMessage = new SendMessage(this.chatId, "*" + newText);
             sendMessage.replyToMessageId(this.replyMessage.messageId());
             sendMessage.disableWebPagePreview(true);
-            this.bot.execute(sendMessage);
+            Bot.bot.execute(sendMessage);
         });
     }
 }

@@ -1,17 +1,13 @@
-import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Message;
-import com.pengrad.telegrambot.request.GetMe;
 
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 class DetectCommand {
     private Message message;
-    private TelegramBot bot;
 
-    DetectCommand(Message message, TelegramBot bot) {
+    DetectCommand(Message message) {
         this.message = message;
-        this.bot = bot;
     }
 
     CommandType get() {
@@ -61,13 +57,11 @@ class DetectCommand {
     }
 
     private boolean isAbout() {
-        var botUserName = this.bot.execute(new GetMe()).user().username();
-
         if (this.message.text().equals("/about")) {
             return true;
         }
 
-        if (this.message.text().equals("/about@" + botUserName)) {
+        if (this.message.text().equals("/about@" + Bot.botUserName)) {
             return true;
         }
 
