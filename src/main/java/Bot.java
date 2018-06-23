@@ -1,8 +1,9 @@
 import com.pengrad.telegrambot.TelegramBot;
+import de.fuerstenau.buildconfig.BuildConfig;
 
 public class Bot {
     public static void main(String[] args) {
-        TelegramBot bot = new TelegramBot("BOT_TOKEN");
+        TelegramBot bot = new TelegramBot(BuildConfig.BOT_TOKEN);
         var updateHandler = new UpdateHandler(bot);
 
         updateHandler.run((update, message, userId, chatId) -> {

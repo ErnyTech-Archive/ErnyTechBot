@@ -12,6 +12,8 @@ plugins {
 
     // Apply the application plugin to add support for building an application
     id 'application'
+
+    id 'de.fuerstenau.buildconfig' version '1.1.8'
 }
 
 sourceCompatibility = 10
@@ -29,6 +31,10 @@ repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+}
+
+buildConfig {
+    buildConfigField 'String', 'BOT_TOKEN', 'MY_BOT_TOKEN_HERE'
 }
 
 task fatJar(type: Jar) {
