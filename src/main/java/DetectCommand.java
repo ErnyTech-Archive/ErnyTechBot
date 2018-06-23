@@ -5,16 +5,16 @@ import com.pengrad.telegrambot.request.GetMe;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-public class DetectCommand {
+class DetectCommand {
     private Message message;
     private TelegramBot bot;
 
-    public DetectCommand(Message message, TelegramBot bot) {
+    DetectCommand(Message message, TelegramBot bot) {
         this.message = message;
         this.bot = bot;
     }
 
-    public CommandType get() {
+    CommandType get() {
         if (this.message == null) {
             return CommandType.nothing;
         }
@@ -41,7 +41,23 @@ public class DetectCommand {
             return false;
         }
 
-        return this.message.text().matches("s/(.*)/(.*)/");
+        if (!this.message.text().matches("s/(.*)/(.*)/")) {
+            return false;
+        }
+
+        if (this.message.replyToMessage() == null) {
+            return false;
+        }
+
+        if (this.message.replyToMessage().text() == null) {
+            return false;
+        }
+
+        if (this.message.replyToMessage().text().trim().length() < 1) {
+            return false;
+        }
+
+        return true;
     }
 
     private boolean isAbout() {
