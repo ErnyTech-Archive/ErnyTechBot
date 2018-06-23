@@ -30,3 +30,12 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
 }
+
+task fatJar(type: Jar) {
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+}
