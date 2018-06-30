@@ -27,6 +27,14 @@ class DetectCommand {
             return CommandType.about;
         }
 
+        if (isSource()) {
+            return CommandType.source;
+        }
+
+        if (isOp()) {
+            return CommandType.op;
+        }
+
         return CommandType.nothing;
     }
 
@@ -49,7 +57,7 @@ class DetectCommand {
             return false;
         }
 
-        if (this.message.replyToMessage().text().trim().length() < 1) {
+        if (this.message.replyToMessage().text().split("/").length < 2) {
             return false;
         }
 
@@ -57,11 +65,31 @@ class DetectCommand {
     }
 
     private boolean isAbout() {
-        if (this.message.text().equals("/about")) {
+        return genericCommandDetect("about");
+    }
+
+    private boolean isSource() {
+        return genericCommandDetect("source");
+    }
+
+    private boolean isOp() {
+        if (!this.message.text().matches("/op (.*)")) {
+            return false;
+        }
+
+        if (this.message.text().split("\\s+").length != 2) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean genericCommandDetect(String command) {
+        if (this.message.text().equals("/" + command)) {
             return true;
         }
 
-        if (this.message.text().equals("/about@" + Bot.botUserName)) {
+        if (this.message.text().equals("/" + command + "@" + Bot.botUserName)) {
             return true;
         }
 

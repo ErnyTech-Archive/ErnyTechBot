@@ -13,19 +13,24 @@ class SedHandler {
     }
 
     void run() {
-        Bot.executor.execute(() -> {
-            var match = this.message.text().split("/")[1];
-            var replace = this.message.text().split("/")[2];
+        var regex = this.message.text().split("/");
+        var match = regex[1];
 
-            if (!this.replyMessage.text().contains(match)) {
-                return;
-            }
+        String replace;
+        if (regex.length < 3) {
+            replace = "";
+        } else {
+            replace = regex[2];
+        }
 
-            var newText = this.replyMessage.text().replace(match, replace);
-            var sendMessage = new SendMessage(this.chatId, "*" + newText);
-            sendMessage.replyToMessageId(this.replyMessage.messageId());
-            sendMessage.disableWebPagePreview(true);
-            Bot.bot.execute(sendMessage);
-        });
+        if (!this.replyMessage.text().contains(match)) {
+            return;
+        }
+
+        var newText = this.replyMessage.text().replace(match, replace);
+        var sendMessage = new SendMessage(this.chatId, "*" + newText);
+        sendMessage.replyToMessageId(this.replyMessage.messageId());
+        sendMessage.disableWebPagePreview(true);
+        Bot.bot.execute(sendMessage);
     }
 }
