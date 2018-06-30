@@ -43,6 +43,11 @@ public class Bot {
                     new OpHandler(message, chatId).run();
                     break;
                 }
+
+                case send: {
+                    new SendHandler(message, chatId).run();
+                    break;
+                }
             }
         });
     }
