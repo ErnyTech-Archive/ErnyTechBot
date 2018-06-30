@@ -53,15 +53,15 @@ class DetectCommand {
             return false;
         }
 
+        if (this.message.text().split("/").length < 2) {
+            return false;
+        }
+
         if (this.message.replyToMessage() == null) {
             return false;
         }
 
         if (this.message.replyToMessage().text() == null) {
-            return false;
-        }
-
-        if (this.message.replyToMessage().text().split("/").length < 2) {
             return false;
         }
 
