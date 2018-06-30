@@ -9,7 +9,7 @@ class SourceHandler {
     }
 
     void run() {
-        var sendMessage = new SendMessage(this.chatId, "Puoi ottenere il sorgente completo di questo bot [qui](\"https://github.com/ErnyTech/ErnyTechBot\")");
+        var sendMessage = new SendMessage(this.chatId, "Puoi ottenere il sorgente completo di questo bot [qui](https://github.com/ErnyTech/ErnyTechBot)");
         sendMessage.parseMode(ParseMode.Markdown);
         Bot.bot.execute(sendMessage);
     }

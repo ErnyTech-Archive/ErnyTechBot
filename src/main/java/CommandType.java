@@ -3,5 +3,6 @@ public enum  CommandType {
     about,
     source,
     op,
+    send,
     nothing
 }

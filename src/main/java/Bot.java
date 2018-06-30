@@ -46,4 +46,14 @@ public class Bot {
             }
         });
     }
+
+    public static boolean isAdmin(User user) {
+        for (User admin : botAdmins) {
+            if (admin == user) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

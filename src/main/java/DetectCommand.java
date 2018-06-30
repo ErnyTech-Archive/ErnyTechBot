@@ -73,15 +73,11 @@ class DetectCommand {
     }
 
     private boolean isOp() {
-        if (!this.message.text().matches("/op (.*)")) {
-            return false;
-        }
+        return genericCommandTxtDetect("op");
+    }
 
-        if (this.message.text().split("\\s+").length != 2) {
-            return false;
-        }
-
-        return true;
+    private boolean isSend() {
+        return genericCommandTxtDetect("send");
     }
 
     private boolean genericCommandDetect(String command) {
@@ -94,5 +90,17 @@ class DetectCommand {
         }
 
         return false;
+    }
+
+    private boolean genericCommandTxtDetect(String command) {
+        if (!this.message.text().matches("/" + command + "(.*)")) {
+            return false;
+        }
+
+        if (this.message.text().split("\\s+").length < 2) {
+            return false;
+        }
+
+        return true;
     }
 }
