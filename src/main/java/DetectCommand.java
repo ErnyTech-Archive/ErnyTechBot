@@ -35,6 +35,10 @@ class DetectCommand {
             return CommandType.op;
         }
 
+        if (isSend()) {
+            return CommandType.send;
+        }
+
         return CommandType.nothing;
     }
 

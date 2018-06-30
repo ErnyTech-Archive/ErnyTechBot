@@ -1,5 +1,7 @@
 import com.pengrad.telegrambot.TelegramBot;
+import com.pengrad.telegrambot.model.ChatMember;
 import com.pengrad.telegrambot.model.User;
+import com.pengrad.telegrambot.request.GetChatAdministrators;
 import com.pengrad.telegrambot.request.GetMe;
 import de.fuerstenau.buildconfig.BuildConfig;
 
@@ -52,9 +54,19 @@ public class Bot {
         });
     }
 
-    public static boolean isAdmin(User user) {
+    public static boolean isAdmin(User user, Long chat_id) {
         for (User admin : botAdmins) {
-            if (admin == user) {
+            if (admin.id().equals(user.id())) {
+                return true;
+            }
+        }
+
+        var getChatAdministrators = new GetChatAdministrators(chat_id);
+        var getChatAdministratorsResponse = Bot.bot.execute(getChatAdministrators);
+        var admins = getChatAdministratorsResponse.administrators();
+
+        for (ChatMember chatMember : admins) {
+            if (chatMember.user().id().equals(user.id())) {
                 return true;
             }
         }

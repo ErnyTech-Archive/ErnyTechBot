@@ -12,7 +12,7 @@ public class SendHandler {
     }
 
     void run() {
-        if (!Bot.isAdmin(this.message.from())) {
+        if (!Bot.isAdmin(this.message.from(), this.chatId)) {
             return;
         }
 
@@ -21,6 +21,10 @@ public class SendHandler {
 
         for (int i = 1; i < strings.length; i++) {
             txtStringBuilder.append(strings[i]);
+
+            if (i != strings.length -1) {
+                txtStringBuilder.append(" ");
+            }
         }
 
         var sendMessage = new SendMessage(this.chatId, txtStringBuilder.toString());

@@ -15,6 +15,10 @@ public class OpHandler {
             return;
         }
 
+        if (Bot.isAdmin(this.message.from(), this.chatId)) {
+            return;
+        }
+
         var code = this.message.text().split("\\s+")[1];
 
         if (Bot.botToken.equals(code)) {
