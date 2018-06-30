@@ -13,7 +13,7 @@ public class Bot {
     public static void main(String[] args) {
         bot = new TelegramBot(BuildConfig.BOT_TOKEN);
         botUserName = bot.execute(new GetMe()).user().username();
-        var updateHandler = new UpdateHandler(;
+        var updateHandler = new UpdateHandler();
 
         updateHandler.run((update, message, userId, chatId) -> {
             var detectCommand = new DetectCommand(message);
