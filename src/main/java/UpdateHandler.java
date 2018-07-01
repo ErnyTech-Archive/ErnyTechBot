@@ -59,6 +59,7 @@ class UpdateHandler {
                 try {
                     updateCallback.handle(update, message, userId, chatId);
                 } catch (RuntimeException e) {
+                    e.printStackTrace();
                     continue;
                 }
 

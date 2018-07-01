@@ -61,13 +61,15 @@ public class Bot {
             }
         }
 
-        var getChatAdministrators = new GetChatAdministrators(chat_id);
-        var getChatAdministratorsResponse = Bot.bot.execute(getChatAdministrators);
-        var admins = getChatAdministratorsResponse.administrators();
+        if (chat_id < 0) {
+            var getChatAdministrators = new GetChatAdministrators(chat_id);
+            var getChatAdministratorsResponse = Bot.bot.execute(getChatAdministrators);
+            var admins = getChatAdministratorsResponse.administrators();
 
-        for (ChatMember chatMember : admins) {
-            if (chatMember.user().id().equals(user.id())) {
-                return true;
+            for (ChatMember chatMember : admins) {
+                if (chatMember.user().id().equals(user.id())) {
+                    return true;
+                }
             }
         }
 
